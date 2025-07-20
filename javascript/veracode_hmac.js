@@ -4,11 +4,11 @@ var url = require('url');
 var crypto = require('crypto-js');
 
 /* set Veracode API credentials in api_id and api_key in environment*/
-const id = pm.environment.get('api_id');
+const id = provess.env.API_ID;
 if (!id) {
     throw new Error("Environment does not have an 'api_id'. Please ensure you have configured a Veracode environment.");
 }
-const key = pm.environment.get('api_key');
+const key = provess.env.API_KEY;
 if (!id) {
     throw new Error("Environment does not have an 'api_key'. Please ensure you have configured a Veracode environment.");
 }
@@ -53,12 +53,4 @@ function calculateVeracodeAuthHeader(httpMethod, requestUrl) {
     return authorizationScheme + " " + authorizationParam;
 }
 
-var {Property} = require('postman-collection');
-const substitutedUrl = Property.replaceSubstitutions(pm.request.url.toString(), pm.variables.toObject());
-
-let hmac = calculateVeracodeAuthHeader(pm.request.method, substitutedUrl);
-pm.request.headers.add({
-    key: "Authorization",
-    value: hmac
-});
-
+export{ calculateVeracodeAuthHeader }
