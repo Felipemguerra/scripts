@@ -1,0 +1,16 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "main": "",
+  "scripts": {
+    "merge_sbom": "node merge_sbom_from_veracode.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "crypto-js": "^4.2.0"
+  },
+  "devDependencies": {},
+  "description": ""
+}
