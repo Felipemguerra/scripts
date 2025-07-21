@@ -1,16 +1,16 @@
 /*jshint esversion: 6 */
 
-var url = require('url');
-var crypto = require('crypto-js');
+import 'url';
+import 'crypto-js';
 
 /* set Veracode API credentials in api_id and api_key in environment*/
-const id = provess.env.API_ID;
+const id = process.env.API_ID;
 if (!id) {
-    throw new Error("Environment does not have an 'api_id'. Please ensure you have configured a Veracode environment.");
+    throw new Error("Environment does not have an 'API_ID'. Please ensure you have configured a Veracode environment.");
 }
-const key = provess.env.API_KEY;
+const key = process.env.API_KEY;
 if (!id) {
-    throw new Error("Environment does not have an 'api_key'. Please ensure you have configured a Veracode environment.");
+    throw new Error("Environment does not have an 'API_KEY'. Please ensure you have configured a Veracode environment.");
 }
 
 const authorizationScheme = 'VERACODE-HMAC-SHA-256';

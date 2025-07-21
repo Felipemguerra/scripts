@@ -3,14 +3,18 @@
   "version": "1.0.0",
   "main": "",
   "scripts": {
-    "merge_sbom": "node merge_sbom_from_veracode.js"
+    "sbom": "curl -Lo cyclonedx https://github.com/CycloneDX/cyclonedx-cli/releases/latest/download/cyclonedx-win-x64.exe && node merge_sbom_from_veracode.js"
   },
+  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.10.0",
-    "crypto-js": "^4.2.0"
+    "crypto-js": "^4.2.0",
+    "url": "^0.11.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@cyclonedx/cyclonedx-npm": "^4.0.0"
+  },
   "description": ""
 }
