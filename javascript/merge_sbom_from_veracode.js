@@ -1,5 +1,5 @@
-import 'axios';
-//import { calculateVeracodeAuthHeader } from './veracode_hmac.js';
+import axios from 'axios';
+import { calculateVeracodeAuthHeader } from './veracode_hmac.cjs';
 import { mkdir, writeFile, rm, unlink } from 'node:fs/promises';
 import path from 'node:path'
 import { execFile } from 'node:child_process';
@@ -17,21 +17,21 @@ const sbom_url = `https://api.veracode.com/srcclr/sbom/v1/targets/${application_
 async function get_application_guids() {
   let applications_config = {
     method: GET_METHOD,
-    maxBodyLength: Infinity,
+    accept: '*/*',
     url: application_url,
     headers: {
-      Authorization:calculateVeracodeAuthHeader(GET_METHOD, application_url)
+      Authorization:calculateVeracodeAuthHeader(GET_METHOD)
     }
   };
   try {
     const response = await axios.request(applications_config);
     return response._embedded.applications;
   } catch (error) {
-    console.error('Error fetching applications:', error);
+    console.log('Error fetching applications:', error);
     throw error;
   }
 }
-async function get_application_sboms(get_application_guids) {
+async function get_application_sboms(applications_guids) {
   let sboms = [];
   const sbom_config = {
     method: GET_METHOD,
@@ -63,7 +63,6 @@ async function write_sboms_to_folder(sboms_array, folder_name) {
         : JSON.stringify(sbom, null, 2);
       return writeFile(filename, content, 'utf8');
     });
-
     await Promise.all(tasks);
     console.log(`Successfully wrote ${sboms_array.length} files to "${folder_name}".`);
   } catch (err) {
@@ -94,8 +93,8 @@ async function cleanup(folder_name) {
   }
 }
 
-let application_guid_array = get_application_guids();
-let sboms_array = get_application_sboms(application_guid_array);
-await write_sboms_to_folder(sboms_array, folder_name);
-await merge_sboms(folder_name, output_file);
-cleanup(folder_name)
+let application_guid_array = await get_application_guids();
+//let sboms_array = await get_application_sboms(application_guid_array);
+//await write_sboms_to_folder(sboms_array, folder_name);
+//await merge_sboms(folder_name, output_file);
+//cleanup(folder_name)
