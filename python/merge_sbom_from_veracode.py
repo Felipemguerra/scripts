@@ -1,9 +1,10 @@
 
-import sys,os,requests,shutil,json,subprocess
+import sys,os,requests,shutil,json,subprocess,datetime
 from veracode_api_signing.plugin_requests import RequestsAuthPluginVeracodeHMAC as get_veracode_hamc
 
 sboms_folder = "./sboms"
-output_sbom_file = "tx-gov.sbom.json"
+today = datetime.date.today()
+output_sbom_file = "tx-gov.sbom-" + today.strftime("%Y-%m-%d") + ".json"
 cyclonedx_url = "https://github.com/CycloneDX/cyclonedx-cli/releases/latest/download/cyclonedx-win-x64.exe"
 cyclone_filename = "cyclonedx.exe"
 api_base = "https://api.veracode.com/appsec/v1"
@@ -40,12 +41,18 @@ def get_veracode_sbom(application_guid):
         sys.exit(1)
     
 def save_sbom_to_file(sbom, index):
-    with open('./sboms/sboms'+ str(index) +'.json', 'w') as file:
+    sbom_name = 'sbom' + str(index) +'.json'
+    with open('./sboms/'+ sbom_name, 'w') as file:
         file.write(json.dumps(sbom))
+    return sbom_name
 
-def merge_sboms(sboms_folder, output_file):
-    result = subprocess.run(['cyclonedx', 'merge', '--input-files', sboms_folder+'/*.json', '--output-file', output_file], capture_output=True, text=True)
-    print(result.stdout)
+def merge_sboms(sboms_folder, output_file, sbom_names):
+    args = ['cyclonedx.exe', 'merge', '--input-format', 'json', '--input-files']
+    for sbom in sbom_names:
+        args.append(sboms_folder+'/'+sbom)
+    args.extend(['--output-file', output_file, '--output-format', 'json'])
+    result = subprocess.run(args, capture_output=True, text=True)
+    print(result.stderr)
 
 def cleanup():
     if os.path.exists(sboms_folder):
@@ -56,6 +63,7 @@ def cleanup():
 if __name__ == "__main__":
     setup()
     applications_response = get_veracode_applications()
+    sbom_names = []
     if not applications_response.ok:
         print(applications_response.status_code)
         print(applications_response.json())
@@ -66,7 +74,7 @@ if __name__ == "__main__":
         sbom_response = get_veracode_sbom(application['guid'])
         if sbom_response.ok:
             print(application["profile"]["name"])
-            save_sbom_to_file(sbom_response.json(),index)
-    merge_sboms(sboms_folder,output_sbom_file)
-    #cleanup()
+            sbom_names.append(save_sbom_to_file(sbom_response.json(),index))
+    merge_sboms(sboms_folder,output_sbom_file,sbom_names)
+    cleanup()
 

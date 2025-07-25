@@ -5,5 +5,6 @@ javascript/*.exe
 
 # python dependencies
 python/local_env/
-python/*.exe
 python/sboms/
+python/*.exe
+python/*.json
