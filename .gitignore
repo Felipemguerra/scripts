@@ -1,3 +1,10 @@
-# dependencies
+# javascript dependencies
 javascript/node_modules/
 javascript/*.exe
+
+
+# python dependencies
+python/local_env/
+python/sboms/
+python/*.exe
+python/*.json

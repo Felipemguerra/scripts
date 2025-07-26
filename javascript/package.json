@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "",
   "scripts": {
-    "sbom": "curl -Lo cyclonedx https://github.com/CycloneDX/cyclonedx-cli/releases/latest/download/cyclonedx-win-x64.exe && node merge_sbom_from_veracode.js"
+    "sbom": "curl -Lo cyclonedx https://github.com/CycloneDX/cyclonedx-cli/releases/latest/download/cyclonedx-win-x64.exe --ssl-no-revoke && node merge_sbom_from_veracode.js"
   },
   "type": "module",
   "author": "",
