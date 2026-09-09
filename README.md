@@ -10,13 +10,13 @@ easy to inspect and adapt for a particular environment.
 
 | Task | Use | Notes |
 | --- | --- | --- |
-| Merge Veracode application SBOMs | [`python/merge_sbom_from_veracode.py`](python/merge_sbom_from_veracode.py) | Downloads CycloneDX CLI and writes a dated merged SBOM on Windows. |
-| Generate a Veracode HMAC header in Node | [`javascript/veracode_hmac.js`](javascript/veracode_hmac.js) | ES module helper; reads `API_ID` and `API_KEY` from the environment. |
-| Generate a Veracode HMAC header in CommonJS | [`javascript/veracode_hmac.cjs`](javascript/veracode_hmac.cjs) | CommonJS variant for older Node integrations. |
-| Merge SBOMs from the JavaScript workflow | [`javascript/merge_sbom_from_veracode.js`](javascript/merge_sbom_from_veracode.js) | Uses Axios and the CycloneDX CLI. Review the enabled workflow before running. |
-| Add affected-version data to a CVE CSV | [`powershell/get_cve_affected_versions.ps1`](powershell/get_cve_affected_versions.ps1) | Queries MITRE's CVE API and writes a new CSV column. |
-| Scan a Maven dependency tree | [`powershell/sca/sca_scan.ps1`](powershell/sca/sca_scan.ps1) | Installs the Veracode SCA helper and runs a `srcclr` Maven scan. |
-| Exercise a local test application | [`python/manuel_testing/application.py`](python/manuel_testing/application.py) | Local manual-testing helper; review it before exposing it to a network. |
+| Merge Veracode application SBOMs | [`python/merge_sbom_from_veracode.py`](https://github.com/Felipemguerra/scripts/blob/master/python/merge_sbom_from_veracode.py) | Downloads CycloneDX CLI and writes a dated merged SBOM on Windows. |
+| Generate a Veracode HMAC header in Node | [`javascript/veracode_hmac.js`](https://github.com/Felipemguerra/scripts/blob/master/javascript/veracode_hmac.js) | ES module helper; reads `API_ID` and `API_KEY` from the environment. |
+| Generate a Veracode HMAC header in CommonJS | [`javascript/veracode_hmac.cjs`](https://github.com/Felipemguerra/scripts/blob/master/javascript/veracode_hmac.cjs) | CommonJS variant for older Node integrations. |
+| Merge SBOMs from the JavaScript workflow | [`javascript/merge_sbom_from_veracode.js`](https://github.com/Felipemguerra/scripts/blob/master/javascript/merge_sbom_from_veracode.js) | Uses Axios and the CycloneDX CLI. Review the enabled workflow before running. |
+| Add affected-version data to a CVE CSV | [`powershell/get_cve_affected_versions.ps1`](https://github.com/Felipemguerra/scripts/blob/master/powershell/get_cve_affected_versions.ps1) | Queries MITRE's CVE API and writes a new CSV column. |
+| Scan a Maven dependency tree | [`powershell/sca/sca_scan.ps1`](https://github.com/Felipemguerra/scripts/blob/master/powershell/sca/sca_scan.ps1) | Installs the Veracode SCA helper and runs a `srcclr` Maven scan. |
+| Exercise a local test application | [`python/manuel_testing/application.py`](https://github.com/Felipemguerra/scripts/blob/master/python/manuel_testing/application.py) | Local manual-testing helper; review it before exposing it to a network. |
 
 ## Quick start
 
