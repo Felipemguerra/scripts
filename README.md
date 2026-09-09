@@ -1,6 +1,6 @@
 # Security engineering scripts
 
-> Small utilities for dependency intelligence, Veracode integrations, and security testing.
+### Small utilities for dependency intelligence, Veracode integrations, and security testing.
 
 This repository is a working toolbox rather than a packaged command-line product. The
 scripts are intentionally close to the APIs and tools they automate, which makes them
