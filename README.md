@@ -24,7 +24,7 @@ easy to inspect and adapt for a particular environment.
 
 Create an isolated environment before installing dependencies:
 
-```sh
+```markdown
 cd python
 python3 -m venv local_env
 . local_env/bin/activate
@@ -38,7 +38,7 @@ available to the Veracode signing library and downloads a Windows CycloneDX exec
 
 ### JavaScript
 
-```sh
+```markdown
 cd javascript
 npm ci
 ```
@@ -50,7 +50,7 @@ CycloneDX executable. Check the URL and output paths before using it on macOS or
 
 Run the scripts from PowerShell and inspect their parameters first:
 
-```powershell
+```markdown
 Get-Help .\get_cve_affected_versions.ps1 -Detailed
 .\get_cve_affected_versions.ps1 `
   -inputpath .\input.csv `
@@ -69,7 +69,7 @@ outputs. The sample file [`python/credentials.sample`](python/credentials.sample
 shows the expected names for a local credentials file, while the JavaScript HMAC
 helpers read:
 
-```sh
+```markdown
 export API_ID='your-veracode-api-id'
 export API_KEY='your-veracode-api-key'
 ```
@@ -80,7 +80,7 @@ but generated files should still be reviewed before they are shared.
 
 ## Repository layout
 
-```text
+```markdown
 javascript/    Node helpers and Veracode SBOM integration
 powershell/    CVE enrichment and Veracode SCA helpers
 python/        SBOM merging, credentials sample, and local testing
